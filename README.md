@@ -18,7 +18,7 @@ Godot 4.7.2 / GDScript / Compatibility 렌더러, 1280×720 canvas_items / keep 
 - scenes/Enemy.tscn, scripts/Enemy.gd: 순찰, 밟기, 측면 접촉
 - scripts/TouchControls.gd: CanvasLayer 안의 멀티터치 TouchScreenButton 4개
 - export_presets.cfg: single-threaded Web
-- .github/workflows/web.yml: main/PR Web 빌드와 아티팩트 업로드 (자동 게시 없음)
+- .github/workflows/web.yml: main/PR Web 빌드, main 빌드 성공 시 GitHub Pages 배포
 
 반복 지형과 UI 노드는 스크립트에서 생성합니다.
 한글 폰트를 배포하지 않으므로 영문을 병기합니다. 필요하면 TitleScene.gd 주석에 따라 한글 폰트를 추가하세요.
@@ -37,3 +37,9 @@ python3 -m http.server 8000 --directory build/web --bind 0.0.0.0
 HTTP 서버 8000 포트를 포워딩합니다. file:// 직접 열기는 지원하지 않습니다.
 variant/thread_support=false이므로 스레드용 SharedArrayBuffer/COOP/COEP에 의존하지 않습니다.
 WebGL 2 지원 브라우저가 필요합니다.
+
+## GitHub Pages 배포
+저장소 Settings → Pages → Build and deployment → Source를 GitHub Actions로 설정하세요.
+main 푸시 또는 main에서 수동 실행하면 Web export가 build/web/index.html과 관련 파일을 생성하고,
+전체 build/web 폴더를 Pages 아티팩트로 업로드한 뒤 deploy-pages로 배포합니다.
+PR에서는 빌드 검증만 수행합니다. 배포 주소는 Actions의 github-pages 환경에 표시됩니다.
